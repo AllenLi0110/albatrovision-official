@@ -75,7 +75,71 @@
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-media" aria-hidden="true"></div>
+        <canvas class="ocean-current-canvas" data-current-canvas aria-hidden="true"></canvas>
+        <div class="hero-media" data-hero-media data-parallax-layer aria-label="Interactive AlbatroVision dashboard preview">
+          <button
+            class="hotspot hotspot-gateway"
+            type="button"
+            aria-label="Edge Gateway hotspot"
+            data-hotspot
+            data-i18n-aria-label="hotspot.gateway.aria"
+          >
+            <span class="hotspot-dot" aria-hidden="true"></span>
+            <span class="hotspot-card">
+              <strong data-i18n="hotspot.gateway.title">Edge Gateway</strong>
+              <span data-i18n="hotspot.gateway.copy">Heartbeat, recordings and events arrive with source provenance.</span>
+            </span>
+          </button>
+          <button
+            class="hotspot hotspot-timeline"
+            type="button"
+            aria-label="Observer timeline hotspot"
+            data-hotspot
+            data-i18n-aria-label="hotspot.timeline.aria"
+          >
+            <span class="hotspot-dot" aria-hidden="true"></span>
+            <span class="hotspot-card">
+              <strong data-i18n="hotspot.timeline.title">Observer Timeline</strong>
+              <span data-i18n="hotspot.timeline.copy">AI events and human marks stay aligned to source video time.</span>
+            </span>
+          </button>
+          <button
+            class="hotspot hotspot-report"
+            type="button"
+            aria-label="Report candidate hotspot"
+            data-hotspot
+            data-i18n-aria-label="hotspot.report.aria"
+          >
+            <span class="hotspot-dot" aria-hidden="true"></span>
+            <span class="hotspot-card">
+              <strong data-i18n="hotspot.report.title">EM Reports</strong>
+              <span data-i18n="hotspot.report.copy">Observer marks become structured report candidates.</span>
+            </span>
+          </button>
+          <div class="hero-status-stack" aria-hidden="true">
+            <div class="status-pill is-live">
+              <span class="status-signal"></span>
+              <div>
+                <strong data-live-counter data-min="98" data-max="100">99</strong><small>%</small>
+                <em data-i18n="status.vessel">Vessel status</em>
+              </div>
+            </div>
+            <div class="status-pill">
+              <span class="status-bars"></span>
+              <div>
+                <strong data-live-counter data-min="34" data-max="42">38</strong><small> ms</small>
+                <em data-i18n="status.edge">Edge latency</em>
+              </div>
+            </div>
+            <div class="status-pill">
+              <span class="status-camera"></span>
+              <div>
+                <strong>4</strong><small>/4</small>
+                <em data-i18n="status.cameras">Cameras online</em>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="hero-overlay" aria-hidden="true"></div>
         <div class="container hero-content">
           <p class="eyebrow">Ocean EM Operations Suite</p>
@@ -178,6 +242,24 @@
               <p data-i18n="module.reports">Project observer marks into electronic observer report candidates with CSV, XLSX and print outputs.</p>
             </article>
           </div>
+
+          <div class="readiness-grid" aria-label="Pilot readiness highlights">
+            <article>
+              <span data-i18n="readiness.one.kicker">Pilot Ready</span>
+              <h3 data-i18n="readiness.one.title">Start with one active vessel</h3>
+              <p data-i18n="readiness.one.copy">Frame a contained operational pilot around dashboard, evidence review and report preparation.</p>
+            </article>
+            <article>
+              <span data-i18n="readiness.two.kicker">Operator Friendly</span>
+              <h3 data-i18n="readiness.two.title">Built for repeated review</h3>
+              <p data-i18n="readiness.two.copy">Dense screens, clear states and fast context shifts keep observers inside the work.</p>
+            </article>
+            <article>
+              <span data-i18n="readiness.three.kicker">Evidence First</span>
+              <h3 data-i18n="readiness.three.title">Source video stays central</h3>
+              <p data-i18n="readiness.three.copy">Every mark, event and candidate report remains tied to the original evidence timeline.</p>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -251,9 +333,37 @@
             <p class="eyebrow">Workflow</p>
             <h2 data-i18n="workflow.title">Evidence enters once, then follows the full review path</h2>
             <p data-i18n="workflow.copy">
-              The MVP validates one complete workflow: edge evidence is produced, AlbatroVision consolidates it,
+              The platform centers on one complete workflow: edge evidence is produced, AlbatroVision consolidates it,
               observers review it on one timeline, and report candidates are prepared from that evidence.
             </p>
+          </div>
+
+          <div class="evidence-timeline" aria-label="Animated evidence timeline">
+            <div class="timeline-track" aria-hidden="true">
+              <span data-timeline-progress></span>
+            </div>
+            <ol>
+              <li class="is-active" data-evidence-step>
+                <span>01</span>
+                <strong data-i18n="timeline.one.title">Record</strong>
+                <em data-i18n="timeline.one.copy">Source video arrives from the vessel edge.</em>
+              </li>
+              <li data-evidence-step>
+                <span>02</span>
+                <strong data-i18n="timeline.two.title">Detect</strong>
+                <em data-i18n="timeline.two.copy">AI events are attached to source seconds.</em>
+              </li>
+              <li data-evidence-step>
+                <span>03</span>
+                <strong data-i18n="timeline.three.title">Review</strong>
+                <em data-i18n="timeline.three.copy">Observers verify and add human marks.</em>
+              </li>
+              <li data-evidence-step>
+                <span>04</span>
+                <strong data-i18n="timeline.four.title">Report</strong>
+                <em data-i18n="timeline.four.copy">Candidate fields are prepared for export.</em>
+              </li>
+            </ol>
           </div>
 
           <ol class="flow-list">
@@ -278,6 +388,95 @@
               <p data-i18n="workflow.four.copy">The reports workspace maps available data to PM electronic observer fields while making gaps visible.</p>
             </li>
           </ol>
+
+          <div class="scroll-story" data-scroll-story>
+            <div class="story-copy">
+              <article class="story-card is-active" data-story-card="capture">
+                <span data-i18n="story.capture.kicker">01 / Capture</span>
+                <h3 data-i18n="story.capture.title">Evidence starts at the vessel edge</h3>
+                <p data-i18n="story.capture.copy">Recordings, thumbnails and AI event metadata are bundled before the reviewer ever opens the timeline.</p>
+              </article>
+              <article class="story-card" data-story-card="align">
+                <span data-i18n="story.align.kicker">02 / Align</span>
+                <h3 data-i18n="story.align.title">Context joins the same clock</h3>
+                <p data-i18n="story.align.copy">GPS, camera lane, gateway state and operations context line up around the same source-video seconds.</p>
+              </article>
+              <article class="story-card" data-story-card="decide">
+                <span data-i18n="story.decide.kicker">03 / Decide</span>
+                <h3 data-i18n="story.decide.title">Human judgement remains explicit</h3>
+                <p data-i18n="story.decide.copy">Machine events stay visible as evidence while observer marks become the official review layer.</p>
+              </article>
+            </div>
+            <figure class="story-visual">
+              <img src="assets/dashboard-hero.png" alt="AlbatroVision scroll story dashboard" data-story-image />
+              <figcaption>
+                <strong data-story-title>Fleet Dashboard</strong>
+                <span data-story-caption>Live vessel context before human review.</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-command" id="command-center">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Command Center</p>
+            <h2 data-i18n="command.title">A compact operations surface for ocean evidence</h2>
+            <p data-i18n="command.copy">
+              A richer command-center view can communicate that AlbatroVision is not a brochure concept. It behaves like
+              a real operating layer for vessel state, camera lanes, evidence intake and review readiness.
+            </p>
+          </div>
+
+          <div class="command-layout">
+            <div class="command-board" aria-label="Live system status preview">
+              <div class="command-card status-card">
+                <span class="status-signal"></span>
+                <small data-i18n="command.status.one">Active vessel</small>
+                <strong>Vessel Alpha</strong>
+                <em data-i18n="command.status.one.copy">Tracking normal</em>
+              </div>
+              <div class="command-card status-card">
+                <span class="status-bars"></span>
+                <small data-i18n="command.status.two">Edge Gateway</small>
+                <strong data-live-counter data-min="97" data-max="100">99</strong>
+                <em data-i18n="command.status.two.copy">Sync health</em>
+              </div>
+              <div class="command-card status-card">
+                <span class="status-camera"></span>
+                <small data-i18n="command.status.three">Camera lanes</small>
+                <strong>4</strong>
+                <em data-i18n="command.status.three.copy">All online</em>
+              </div>
+              <div class="command-card command-map">
+                <div class="map-grid" aria-hidden="true">
+                  <span></span>
+                </div>
+                <div>
+                  <small data-i18n="command.map.kicker">GPS Position</small>
+                  <strong>22.4250° / 120.3833°</strong>
+                </div>
+              </div>
+              <div class="command-card evidence-queue">
+                <small data-i18n="command.queue.kicker">Evidence Queue</small>
+                <ul>
+                  <li><span></span><strong data-i18n="command.queue.one">Recording uploaded</strong><em>CAM 02</em></li>
+                  <li><span></span><strong data-i18n="command.queue.two">AI event attached</strong><em>00:57</em></li>
+                  <li><span></span><strong data-i18n="command.queue.three">Observer mark ready</strong><em>Review</em></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="scene-panel">
+              <canvas data-vessel-scene aria-label="3D vessel and camera lane scene"></canvas>
+              <div class="scene-caption">
+                <span data-i18n="scene.kicker">3D Vessel Context</span>
+                <strong data-i18n="scene.title">Camera lanes around one operating vessel</strong>
+                <p data-i18n="scene.copy">A lightweight Three.js scene, with a canvas fallback, shows how cameras and evidence lanes orbit the vessel workflow.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -290,14 +489,40 @@
               This demo shows the operating rhythm of the current ocean solution: Edge Gateway evidence, dashboard
               monitoring, multi-camera human review and electronic observer reporting.
             </p>
-            <a class="text-link" href="#contact" data-i18n="demo.link">Schedule a complete walkthrough</a>
+            <button class="text-link text-button" type="button" data-demo-open data-i18n="demo.link">Schedule a complete walkthrough</button>
           </div>
 
-          <div class="video-frame safe-feed-preview">
+          <button
+            class="video-frame safe-feed-preview"
+            type="button"
+            aria-label="Open demo preview"
+            data-demo-open
+            data-i18n-aria-label="demo.open.aria"
+          >
             <img
               src="assets/demo-preview.png"
               alt="AlbatroVision dashboard preview with AI-generated camera feed replacing source video"
             />
+            <span class="demo-play-badge">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m8 5 8 7-8 7V5Z"></path>
+              </svg>
+              <span data-i18n="demo.open">Open workflow preview</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <section class="contact-cta" aria-labelledby="contact-cta-title">
+        <div class="container contact-cta-inner">
+          <div>
+            <p class="eyebrow">Next Step</p>
+            <h2 id="contact-cta-title" data-i18n="ctaBand.title">Ready to review ocean evidence in one timeline?</h2>
+            <p data-i18n="ctaBand.copy">Use the first call to align vessel scope, source-video handling and observer report expectations.</p>
+          </div>
+          <div class="contact-cta-actions">
+            <a class="button button-primary" href="#contact" data-i18n="ctaBand.primary">Book an Ocean Demo</a>
+            <button class="button button-secondary" type="button" data-demo-open data-i18n="ctaBand.secondary">Preview workflow</button>
           </div>
         </div>
       </section>
@@ -312,9 +537,9 @@
               workflows connect to current operations before expanding pilot, deployment and commercial details.
             </p>
             <div class="contact-points" aria-label="Contact highlights">
-              <span>Ocean monitoring</span>
-              <span>Electronic observer workflow</span>
-              <span>Edge-to-cloud evidence review</span>
+              <span data-i18n="contact.point.one">Ocean monitoring</span>
+              <span data-i18n="contact.point.two">Electronic observer workflow</span>
+              <span data-i18n="contact.point.three">Edge-to-cloud evidence review</span>
             </div>
           </div>
 
@@ -413,6 +638,40 @@
       </section>
     </main>
 
+    <div class="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title" data-demo-modal hidden>
+      <div class="demo-modal-backdrop" data-demo-close></div>
+      <div class="demo-modal-panel">
+        <button
+          class="demo-modal-close"
+          type="button"
+          aria-label="Close demo preview"
+          data-demo-close
+          data-i18n-aria-label="demo.close"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+          </svg>
+        </button>
+        <div class="demo-modal-copy">
+          <p class="eyebrow">Workflow Preview</p>
+          <h2 id="demo-modal-title" data-i18n="demo.modal.title">Follow the evidence from vessel edge to report</h2>
+          <p data-i18n="demo.modal.copy">A concise walkthrough of the current AlbatroVision ocean workflow.</p>
+          <div class="demo-step-tabs" role="tablist" aria-label="Demo preview steps">
+            <button class="is-active" type="button" role="tab" aria-selected="true" data-demo-step="dashboard" data-i18n="demo.step.dashboard">Dashboard</button>
+            <button type="button" role="tab" aria-selected="false" data-demo-step="review" data-i18n="demo.step.review">Human Review</button>
+            <button type="button" role="tab" aria-selected="false" data-demo-step="reports" data-i18n="demo.step.reports">Reports</button>
+          </div>
+        </div>
+        <figure class="demo-modal-media">
+          <img src="assets/dashboard-hero.png" alt="AlbatroVision dashboard walkthrough preview" data-demo-modal-image />
+          <figcaption>
+            <strong data-demo-modal-title>Live Fleet Dashboard</strong>
+            <span data-demo-modal-body>Vessel context, edge health and camera lanes stay visible before review.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
     <footer class="site-footer">
       <div class="container footer-grid">
         <a class="brand" href="#top" aria-label="AlbatroVision home">
@@ -423,7 +682,7 @@
           </span>
           <span>AlbatroVision</span>
         </a>
-        <p>Ocean EM operations platform for fleet monitoring, edge evidence review and observer workflows.</p>
+        <p data-i18n="footer.copy">Ocean EM operations platform for fleet monitoring, edge evidence review and observer workflows.</p>
         <a href="#contact" data-i18n="cta.demo">Book a Demo</a>
       </div>
     </footer>
