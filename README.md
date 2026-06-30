@@ -51,7 +51,7 @@ After saving the settings, GitHub Pages will publish the site from `index.html`.
 
 ## Content Notes
 
-- The site supports Traditional Chinese and English with the `文 / A` toggle.
+- The site defaults to English and supports Traditional Chinese with the language icon toggle.
 - The contact email is `allen@albatrovision.com`.
 - The visual assets are prepared for public website use.
 - The site presents the AlbatroVision ocean workflow and does not require a backend API.

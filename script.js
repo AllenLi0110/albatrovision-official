@@ -233,9 +233,10 @@ let activeTourKey = "dashboard";
 
 function getStoredLocale() {
   try {
-    return localStorage.getItem("albatrovision.locale") === "en" ? "en" : "zh";
+    const storedLocale = localStorage.getItem("albatrovision.locale");
+    return storedLocale === "zh" || storedLocale === "en" ? storedLocale : "en";
   } catch {
-    return "zh";
+    return "en";
   }
 }
 
@@ -248,7 +249,7 @@ function saveLocale(locale) {
 }
 
 function t(key) {
-  return pageCopy[currentLocale][key] || pageCopy.zh[key] || key;
+  return pageCopy[currentLocale][key] || pageCopy.en[key] || key;
 }
 
 function syncNavLabel() {
