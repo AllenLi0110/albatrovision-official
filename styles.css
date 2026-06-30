@@ -572,8 +572,7 @@ textarea {
 }
 
 .module-card::after,
-.flow-list li::after,
-.scope-grid article::after {
+.flow-list li::after {
   position: absolute;
   inset: 0;
   content: "";
@@ -584,16 +583,14 @@ textarea {
 }
 
 .module-card:hover,
-.flow-list li:hover,
-.scope-grid article:hover {
+.flow-list li:hover {
   border-color: rgba(15, 183, 168, 0.34);
   box-shadow: 0 22px 58px rgba(30, 47, 48, 0.12);
   transform: translateY(-4px);
 }
 
 .module-card:hover::after,
-.flow-list li:hover::after,
-.scope-grid article:hover::after {
+.flow-list li:hover::after {
   opacity: 1;
 }
 
@@ -899,61 +896,6 @@ textarea {
 
 .video-frame:hover img {
   transform: scale(1.015);
-}
-
-.section-scope {
-  background: var(--paper-alt);
-}
-
-.scope-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.scope-grid article {
-  position: relative;
-  min-height: 360px;
-  padding: 24px;
-  background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition:
-    border-color 180ms ease,
-    box-shadow 220ms ease,
-    transform 220ms var(--ease-out);
-}
-
-.scope-grid h3 {
-  margin: 0 0 18px;
-  font-size: 1.2rem;
-}
-
-.scope-grid ul {
-  display: grid;
-  gap: 12px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.scope-grid li {
-  position: relative;
-  padding-left: 22px;
-  color: var(--ink-soft);
-  font-size: 0.93rem;
-}
-
-.scope-grid li::before {
-  position: absolute;
-  top: 0.62em;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  content: "";
-  background: var(--teal);
-  border-radius: 50%;
 }
 
 .section-contact {
@@ -1326,8 +1268,7 @@ textarea {
   }
 
   .module-grid,
-  .flow-list,
-  .scope-grid {
+  .flow-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1430,8 +1371,7 @@ textarea {
 
   .strip-grid,
   .module-grid,
-  .flow-list,
-  .scope-grid {
+  .flow-list {
     grid-template-columns: 1fr;
   }
 
@@ -1446,8 +1386,7 @@ textarea {
   }
 
   .module-card,
-  .flow-list li,
-  .scope-grid article {
+  .flow-list li {
     min-height: auto;
   }
 
