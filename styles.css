@@ -285,8 +285,9 @@ textarea {
   overflow: hidden;
   color: #ffffff;
   background:
+    radial-gradient(circle at 88% 10%, rgba(255, 218, 148, 0.18), rgba(255, 218, 148, 0) 30%),
     radial-gradient(circle at 82% 20%, rgba(15, 183, 168, 0.18), rgba(15, 183, 168, 0) 32%),
-    linear-gradient(135deg, #081215 0%, #071013 50%, #0b1c1d 100%);
+    linear-gradient(135deg, #081215 0%, #071013 48%, #0e2627 100%);
   isolation: isolate;
 }
 
@@ -330,20 +331,35 @@ textarea {
   background-repeat: no-repeat;
   opacity: 1;
   overflow: hidden;
-  filter: saturate(1.02) contrast(1.02);
-  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.42) 38%, rgba(0, 0, 0, 0.86) 67%, #000000 100%);
-  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.42) 38%, rgba(0, 0, 0, 0.86) 67%, #000000 100%);
+  filter: brightness(1.13) saturate(1.08) contrast(1.04);
+  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.44) 34%, rgba(0, 0, 0, 0.9) 62%, #000000 100%);
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.44) 34%, rgba(0, 0, 0, 0.9) 62%, #000000 100%);
   animation: vessel-float 11s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-media::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  background:
+    radial-gradient(circle at 91% 4%, rgba(255, 247, 211, 0.68) 0%, rgba(255, 214, 142, 0.26) 15%, rgba(255, 214, 142, 0) 34%),
+    linear-gradient(128deg, transparent 46%, rgba(255, 247, 211, 0.24) 54%, rgba(255, 247, 211, 0) 68%),
+    linear-gradient(144deg, transparent 50%, rgba(200, 255, 244, 0.13) 60%, rgba(200, 255, 244, 0) 74%);
+  mix-blend-mode: screen;
+  opacity: 0.88;
   pointer-events: none;
 }
 
 .hero-media::after {
   position: absolute;
   inset: 0;
+  z-index: 2;
   content: "";
   background:
-    linear-gradient(90deg, rgba(7, 16, 19, 0.8) 0%, rgba(7, 16, 19, 0.28) 42%, rgba(7, 16, 19, 0.02) 72%),
-    linear-gradient(115deg, transparent 0%, rgba(200, 255, 244, 0.08) 48%, transparent 58%);
+    linear-gradient(90deg, rgba(7, 16, 19, 0.8) 0%, rgba(7, 16, 19, 0.34) 39%, rgba(7, 16, 19, 0.04) 69%, rgba(255, 239, 196, 0.06) 100%),
+    linear-gradient(115deg, transparent 0%, rgba(200, 255, 244, 0.08) 48%, transparent 60%);
   pointer-events: none;
 }
 
@@ -353,8 +369,8 @@ textarea {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(6, 12, 14, 0.98) 0%, rgba(6, 12, 14, 0.92) 32%, rgba(6, 12, 14, 0.62) 56%, rgba(6, 12, 14, 0.16) 100%),
-    linear-gradient(0deg, rgba(7, 16, 19, 0.9) 0%, rgba(7, 16, 19, 0.14) 50%, rgba(7, 16, 19, 0.26) 100%);
+    linear-gradient(90deg, rgba(6, 12, 14, 0.98) 0%, rgba(6, 12, 14, 0.9) 31%, rgba(6, 12, 14, 0.48) 53%, rgba(6, 12, 14, 0.1) 76%, rgba(6, 12, 14, 0.02) 100%),
+    linear-gradient(0deg, rgba(7, 16, 19, 0.82) 0%, rgba(7, 16, 19, 0.08) 52%, rgba(255, 230, 176, 0.1) 100%);
 }
 
 .hero::after {
@@ -379,12 +395,12 @@ textarea {
 
 .hero-status-stack {
   position: absolute;
-  top: 150px;
-  right: max(34px, calc((100vw - var(--container)) / 2 + 4px));
+  top: 138px;
+  right: max(10px, calc((100vw - var(--container)) / 2 - 96px));
   z-index: 2;
   display: grid;
-  gap: 14px;
-  width: min(280px, 24vw);
+  gap: 10px;
+  width: min(216px, 17vw);
   pointer-events: auto;
 }
 
@@ -396,17 +412,17 @@ textarea {
 
 .status-pill {
   display: grid;
-  grid-template-columns: 34px 1fr;
-  gap: 13px;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
   align-items: center;
-  min-height: 78px;
-  padding: 14px 16px;
+  min-height: 66px;
+  padding: 11px 13px;
   color: #ffffff;
-  background: rgba(5, 13, 15, 0.86);
-  border: 1px solid rgba(200, 255, 244, 0.22);
+  background: rgba(5, 13, 15, 0.78);
+  border: 1px solid rgba(200, 255, 244, 0.2);
   border-radius: var(--radius);
-  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.38);
-  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(16px);
   transition:
     border-color 180ms ease,
     transform 180ms var(--ease-out),
@@ -420,8 +436,11 @@ textarea {
 }
 
 .status-pill strong {
-  font-size: 1.28rem;
+  display: inline-block;
+  max-width: 100%;
+  font-size: 1rem;
   line-height: 1;
+  overflow-wrap: anywhere;
 }
 
 .status-pill small {
@@ -432,14 +451,15 @@ textarea {
 
 .status-pill em {
   display: block;
-  margin-top: 6px;
+  margin-top: 5px;
   color: rgba(200, 255, 244, 0.82);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-style: normal;
   font-weight: 750;
 }
 
 .status-signal,
+.status-network,
 .status-bars,
 .status-camera {
   position: relative;
@@ -469,6 +489,37 @@ textarea {
   border: 1px solid rgba(157, 255, 88, 0.35);
   border-radius: 50%;
   animation: status-pulse 2.2s ease-out infinite;
+}
+
+.status-network {
+  color: rgba(200, 255, 244, 0.9);
+}
+
+.status-network::before,
+.status-network::after {
+  position: absolute;
+  left: 50%;
+  content: "";
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.status-network::before {
+  top: 4px;
+  width: 22px;
+  height: 18px;
+}
+
+.status-network::after {
+  top: 10px;
+  width: 12px;
+  height: 10px;
+}
+
+.status-network {
+  background: radial-gradient(circle at 50% 19px, currentColor 0 2px, transparent 3px);
 }
 
 .status-bars {
@@ -2053,8 +2104,8 @@ textarea {
 
   .hero-status-stack {
     top: 128px;
-    right: 24px;
-    width: min(248px, 32vw);
+    right: 12px;
+    width: min(208px, 24vw);
   }
 
   .hero-content {
@@ -2180,8 +2231,8 @@ textarea {
 
   .hero-overlay {
     background:
-      linear-gradient(90deg, rgba(6, 12, 14, 0.94) 0%, rgba(6, 12, 14, 0.78) 62%, rgba(6, 12, 14, 0.44) 100%),
-      linear-gradient(0deg, rgba(7, 16, 19, 0.86) 0%, rgba(7, 16, 19, 0.08) 52%, rgba(7, 16, 19, 0.24) 100%);
+      linear-gradient(90deg, rgba(6, 12, 14, 0.94) 0%, rgba(6, 12, 14, 0.74) 60%, rgba(6, 12, 14, 0.26) 100%),
+      linear-gradient(0deg, rgba(7, 16, 19, 0.82) 0%, rgba(7, 16, 19, 0.08) 52%, rgba(255, 230, 176, 0.08) 100%);
   }
 
   .hero h1 {
