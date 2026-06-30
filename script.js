@@ -23,15 +23,6 @@ const pageCopy = {
       "將 Jetson Edge Gateway 產生的錄影、AI 事件、船隊狀態與人工判讀集中在同一條時間線，讓觀察員從完整原始影像完成標記、審核與報告準備。",
     "hero.primaryCta": "預約海洋方案 Demo",
     "hero.secondaryCta": "看產品流程",
-    "hotspot.gateway.aria": "Edge Gateway 熱點",
-    "hotspot.gateway.title": "Edge Gateway",
-    "hotspot.gateway.copy": "Heartbeat、錄影與事件都保留來源脈絡。",
-    "hotspot.timeline.aria": "觀察員時間線熱點",
-    "hotspot.timeline.title": "觀察員時間線",
-    "hotspot.timeline.copy": "AI 事件與人工標記對齊原始影片秒數。",
-    "hotspot.report.aria": "電子觀察員報告熱點",
-    "hotspot.report.title": "EM 報告",
-    "hotspot.report.copy": "人工標記轉成結構化報告候選資料。",
     "status.vessel": "船隻狀態",
     "status.edge": "Edge 延遲",
     "status.cameras": "鏡頭在線",
@@ -168,15 +159,6 @@ const pageCopy = {
       "AlbatroVision brings Jetson Edge Gateway recordings, AI events, vessel context and human review into one evidence timeline so observers can mark, verify and prepare reports from source video.",
     "hero.primaryCta": "Book an Ocean Demo",
     "hero.secondaryCta": "See the workflow",
-    "hotspot.gateway.aria": "Edge Gateway hotspot",
-    "hotspot.gateway.title": "Edge Gateway",
-    "hotspot.gateway.copy": "Heartbeat, recordings and events arrive with source provenance.",
-    "hotspot.timeline.aria": "Observer timeline hotspot",
-    "hotspot.timeline.title": "Observer Timeline",
-    "hotspot.timeline.copy": "AI events and human marks stay aligned to source video time.",
-    "hotspot.report.aria": "Electronic observer report hotspot",
-    "hotspot.report.title": "EM Reports",
-    "hotspot.report.copy": "Observer marks become structured report candidates.",
     "status.vessel": "Vessel status",
     "status.edge": "Edge latency",
     "status.cameras": "Cameras online",
@@ -716,25 +698,6 @@ function initCurrentCanvas() {
 }
 
 initCurrentCanvas();
-
-const hotspots = [...document.querySelectorAll("[data-hotspot]")];
-
-hotspots.forEach((hotspot) => {
-  hotspot.addEventListener("click", (event) => {
-    event.stopPropagation();
-    const willActivate = !hotspot.classList.contains("is-active");
-    hotspots.forEach((item) => item.classList.remove("is-active"));
-    hotspot.classList.toggle("is-active", willActivate);
-  });
-});
-
-document.addEventListener("pointerdown", (event) => {
-  if (hotspots.length === 0) return;
-  const target = event.target;
-  if (!(target instanceof Node)) return;
-  if (hotspots.some((hotspot) => hotspot.contains(target))) return;
-  hotspots.forEach((hotspot) => hotspot.classList.remove("is-active"));
-});
 
 const evidenceSteps = [...document.querySelectorAll("[data-evidence-step]")];
 const timelineProgress = document.querySelector("[data-timeline-progress]");

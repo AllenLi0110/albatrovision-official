@@ -76,67 +76,27 @@
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
         <canvas class="ocean-current-canvas" data-current-canvas aria-hidden="true"></canvas>
-        <div class="hero-media" data-hero-media data-parallax-layer aria-label="Interactive AlbatroVision dashboard preview">
-          <button
-            class="hotspot hotspot-gateway"
-            type="button"
-            aria-label="Edge Gateway hotspot"
-            data-hotspot
-            data-i18n-aria-label="hotspot.gateway.aria"
-          >
-            <span class="hotspot-dot" aria-hidden="true"></span>
-            <span class="hotspot-card">
-              <strong data-i18n="hotspot.gateway.title">Edge Gateway</strong>
-              <span data-i18n="hotspot.gateway.copy">Heartbeat, recordings and events arrive with source provenance.</span>
-            </span>
-          </button>
-          <button
-            class="hotspot hotspot-timeline"
-            type="button"
-            aria-label="Observer timeline hotspot"
-            data-hotspot
-            data-i18n-aria-label="hotspot.timeline.aria"
-          >
-            <span class="hotspot-dot" aria-hidden="true"></span>
-            <span class="hotspot-card">
-              <strong data-i18n="hotspot.timeline.title">Observer Timeline</strong>
-              <span data-i18n="hotspot.timeline.copy">AI events and human marks stay aligned to source video time.</span>
-            </span>
-          </button>
-          <button
-            class="hotspot hotspot-report"
-            type="button"
-            aria-label="Report candidate hotspot"
-            data-hotspot
-            data-i18n-aria-label="hotspot.report.aria"
-          >
-            <span class="hotspot-dot" aria-hidden="true"></span>
-            <span class="hotspot-card">
-              <strong data-i18n="hotspot.report.title">EM Reports</strong>
-              <span data-i18n="hotspot.report.copy">Observer marks become structured report candidates.</span>
-            </span>
-          </button>
-          <div class="hero-status-stack" aria-hidden="true">
-            <div class="status-pill is-live">
-              <span class="status-signal"></span>
-              <div>
-                <strong data-live-counter data-min="98" data-max="100">99</strong><small>%</small>
-                <em data-i18n="status.vessel">Vessel status</em>
-              </div>
+        <div class="hero-media" data-hero-media data-parallax-layer aria-label="AlbatroVision vessel background"></div>
+        <div class="hero-status-stack" aria-hidden="true">
+          <div class="status-pill is-live">
+            <span class="status-signal"></span>
+            <div>
+              <strong data-live-counter data-min="98" data-max="100">99</strong><small>%</small>
+              <em data-i18n="status.vessel">Vessel status</em>
             </div>
-            <div class="status-pill">
-              <span class="status-bars"></span>
-              <div>
-                <strong data-live-counter data-min="34" data-max="42">38</strong><small> ms</small>
-                <em data-i18n="status.edge">Edge latency</em>
-              </div>
+          </div>
+          <div class="status-pill">
+            <span class="status-bars"></span>
+            <div>
+              <strong data-live-counter data-min="34" data-max="42">38</strong><small> ms</small>
+              <em data-i18n="status.edge">Edge latency</em>
             </div>
-            <div class="status-pill">
-              <span class="status-camera"></span>
-              <div>
-                <strong>4</strong><small>/4</small>
-                <em data-i18n="status.cameras">Cameras online</em>
-              </div>
+          </div>
+          <div class="status-pill">
+            <span class="status-camera"></span>
+            <div>
+              <strong>4</strong><small>/4</small>
+              <em data-i18n="status.cameras">Cameras online</em>
             </div>
           </div>
         </div>

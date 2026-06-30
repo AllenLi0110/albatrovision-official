@@ -320,33 +320,30 @@ textarea {
   --parallax-x: 0px;
   --parallax-y: 0px;
   position: absolute;
-  top: 126px;
-  right: max(22px, calc((100vw - var(--container)) / 2 - 22px));
+  inset: -20px;
   z-index: 0;
-  width: min(56vw, 900px);
-  height: clamp(390px, 56svh, 500px);
-  background-image: url("assets/dashboard-hero.png");
-  background-size: contain;
-  background-position: center;
+  width: auto;
+  height: auto;
+  background-image: url("assets/hero-vessel-background.png");
+  background-size: cover;
+  background-position: center right;
   background-repeat: no-repeat;
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  border-radius: 18px;
-  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.42);
-  opacity: 0.68;
+  opacity: 1;
   overflow: hidden;
+  filter: saturate(1.02) contrast(1.02);
+  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.42) 38%, rgba(0, 0, 0, 0.86) 67%, #000000 100%);
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.42) 38%, rgba(0, 0, 0, 0.86) 67%, #000000 100%);
   animation: vessel-float 11s ease-in-out infinite;
-  transition:
-    border-color 220ms ease,
-    box-shadow 220ms ease;
+  pointer-events: none;
 }
 
 .hero-media::after {
   position: absolute;
   inset: 0;
   content: "";
-  background: linear-gradient(115deg, transparent 0%, rgba(200, 255, 244, 0.14) 48%, transparent 58%);
-  transform: translateX(-130%);
-  animation: deck-sweep 9s ease-in-out infinite;
+  background:
+    linear-gradient(90deg, rgba(7, 16, 19, 0.8) 0%, rgba(7, 16, 19, 0.28) 42%, rgba(7, 16, 19, 0.02) 72%),
+    linear-gradient(115deg, transparent 0%, rgba(200, 255, 244, 0.08) 48%, transparent 58%);
   pointer-events: none;
 }
 
@@ -356,8 +353,8 @@ textarea {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(6, 12, 14, 0.96) 0%, rgba(6, 12, 14, 0.86) 42%, rgba(6, 12, 14, 0.34) 100%),
-    linear-gradient(0deg, rgba(7, 16, 19, 0.88) 0%, rgba(7, 16, 19, 0.18) 48%, rgba(7, 16, 19, 0.3) 100%);
+    linear-gradient(90deg, rgba(6, 12, 14, 0.98) 0%, rgba(6, 12, 14, 0.92) 32%, rgba(6, 12, 14, 0.62) 56%, rgba(6, 12, 14, 0.16) 100%),
+    linear-gradient(0deg, rgba(7, 16, 19, 0.9) 0%, rgba(7, 16, 19, 0.14) 50%, rgba(7, 16, 19, 0.26) 100%);
 }
 
 .hero::after {
@@ -380,101 +377,15 @@ textarea {
   margin-left: max(calc((100% - var(--container)) / 2), 20px);
 }
 
-.hotspot {
-  position: absolute;
-  z-index: 3;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  color: #061110;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-}
-
-.hotspot-gateway {
-  top: 32%;
-  right: 17%;
-}
-
-.hotspot-timeline {
-  right: 36%;
-  bottom: 20%;
-}
-
-.hotspot-report {
-  right: 8%;
-  bottom: 31%;
-}
-
-.hotspot-dot {
-  position: absolute;
-  inset: 5px;
-  background: linear-gradient(135deg, var(--lime), var(--teal));
-  border: 2px solid rgba(255, 255, 255, 0.86);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 8px rgba(28, 224, 207, 0.12),
-    0 0 24px rgba(28, 224, 207, 0.36);
-}
-
-.hotspot-dot::after {
-  position: absolute;
-  inset: -10px;
-  content: "";
-  border: 1px solid rgba(200, 255, 244, 0.45);
-  border-radius: 50%;
-  animation: status-pulse 2s ease-out infinite;
-}
-
-.hotspot-card {
-  position: absolute;
-  right: 50%;
-  bottom: calc(100% + 10px);
-  display: grid;
-  gap: 3px;
-  width: min(220px, 48vw);
-  padding: 10px 11px;
-  color: #ffffff;
-  text-align: left;
-  background: rgba(5, 13, 15, 0.88);
-  border: 1px solid rgba(200, 255, 244, 0.22);
-  border-radius: var(--radius);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(50%, 8px);
-  transition:
-    opacity 180ms ease,
-    transform 180ms var(--ease-out);
-}
-
-.hotspot-card strong {
-  font-size: 0.82rem;
-  line-height: 1.1;
-}
-
-.hotspot-card span {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.74rem;
-  line-height: 1.35;
-}
-
-.hotspot:hover .hotspot-card,
-.hotspot:focus-visible .hotspot-card,
-.hotspot.is-active .hotspot-card {
-  opacity: 1;
-  transform: translate(50%, 0);
-}
-
 .hero-status-stack {
   position: absolute;
-  top: 28px;
-  right: 24px;
+  top: 150px;
+  right: max(34px, calc((100vw - var(--container)) / 2 + 4px));
   z-index: 2;
   display: grid;
-  gap: 10px;
-  width: min(210px, 34%);
+  gap: 14px;
+  width: min(280px, 24vw);
+  pointer-events: auto;
 }
 
 .status-pill,
@@ -485,20 +396,31 @@ textarea {
 
 .status-pill {
   display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: 10px;
+  grid-template-columns: 34px 1fr;
+  gap: 13px;
   align-items: center;
-  min-height: 62px;
-  padding: 10px 12px;
+  min-height: 78px;
+  padding: 14px 16px;
   color: #ffffff;
-  background: rgba(5, 13, 15, 0.72);
-  border: 1px solid rgba(200, 255, 244, 0.14);
+  background: rgba(5, 13, 15, 0.86);
+  border: 1px solid rgba(200, 255, 244, 0.22);
   border-radius: var(--radius);
-  backdrop-filter: blur(14px);
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(18px);
+  transition:
+    border-color 180ms ease,
+    transform 180ms var(--ease-out),
+    background 180ms ease;
+}
+
+.status-pill:hover {
+  background: rgba(7, 20, 23, 0.92);
+  border-color: rgba(28, 224, 207, 0.38);
+  transform: translateY(-2px);
 }
 
 .status-pill strong {
-  font-size: 1rem;
+  font-size: 1.28rem;
   line-height: 1;
 }
 
@@ -510,9 +432,9 @@ textarea {
 
 .status-pill em {
   display: block;
-  margin-top: 3px;
-  color: rgba(200, 255, 244, 0.72);
-  font-size: 0.72rem;
+  margin-top: 6px;
+  color: rgba(200, 255, 244, 0.82);
+  font-size: 0.78rem;
   font-style: normal;
   font-weight: 750;
 }
@@ -2121,12 +2043,18 @@ textarea {
   }
 
   .hero-media {
-    top: 104px;
-    right: 20px;
-    width: min(720px, calc(100% - 40px));
-    height: 430px;
+    inset: -18px;
+    width: auto;
+    height: auto;
     background-size: cover;
-    opacity: 0.42;
+    background-position: 65% center;
+    opacity: 1;
+  }
+
+  .hero-status-stack {
+    top: 128px;
+    right: 24px;
+    width: min(248px, 32vw);
   }
 
   .hero-content {
@@ -2243,13 +2171,11 @@ textarea {
   }
 
   .hero-media {
-    top: 92px;
-    right: 14px;
-    width: calc(100% - 28px);
-    height: 310px;
-    background-position: 62% center;
-    border-radius: 12px;
-    opacity: 0.28;
+    inset: -14px;
+    width: auto;
+    height: auto;
+    background-position: 68% center;
+    opacity: 1;
   }
 
   .hero-overlay {
@@ -2292,7 +2218,6 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .hotspot,
   .hero-status-stack {
     display: none;
   }
