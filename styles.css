@@ -157,10 +157,11 @@ textarea {
 }
 
 .lang-toggle {
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-  width: 74px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  width: auto;
+  min-width: 102px;
   height: 42px;
   padding: 4px;
   color: rgba(249, 255, 253, 0.72);
@@ -170,26 +171,34 @@ textarea {
   cursor: pointer;
 }
 
-.lang-toggle span {
+.lang-toggle-icon {
+  flex: 0 0 auto;
+  width: 19px;
+  height: 19px;
+  margin: 0 3px 0 4px;
+}
+
+.lang-option {
   display: grid;
   place-items: center;
-  min-width: 0;
+  width: 28px;
+  height: 32px;
   border-radius: 6px;
   font-weight: 900;
   line-height: 1;
 }
 
-.lang-toggle span:first-child {
+.lang-option-zh {
   color: #061110;
   background: #ffffff;
 }
 
-.lang-toggle.is-en span:first-child {
+.lang-toggle.is-en .lang-option-zh {
   color: rgba(249, 255, 253, 0.72);
   background: transparent;
 }
 
-.lang-toggle.is-en span:last-child {
+.lang-toggle.is-en .lang-option-en {
   color: #061110;
   background: #ffffff;
 }
@@ -249,16 +258,27 @@ textarea {
   padding: 144px 0 72px;
   overflow: hidden;
   color: #ffffff;
+  background:
+    radial-gradient(circle at 82% 20%, rgba(15, 183, 168, 0.18), rgba(15, 183, 168, 0) 32%),
+    linear-gradient(135deg, #081215 0%, #071013 50%, #0b1c1d 100%);
   isolation: isolate;
 }
 
 .hero-media {
   position: absolute;
-  inset: 0;
+  top: 126px;
+  right: max(22px, calc((100vw - var(--container)) / 2 - 22px));
   z-index: -3;
+  width: min(56vw, 900px);
+  height: clamp(390px, 56svh, 500px);
   background-image: url("assets/dashboard-hero.png");
-  background-size: cover;
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 18px;
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.42);
+  opacity: 0.68;
 }
 
 .hero-overlay {
@@ -266,8 +286,8 @@ textarea {
   inset: 0;
   z-index: -2;
   background:
-    linear-gradient(90deg, rgba(6, 12, 14, 0.92) 0%, rgba(6, 12, 14, 0.76) 38%, rgba(6, 12, 14, 0.24) 100%),
-    linear-gradient(0deg, rgba(7, 16, 19, 0.82) 0%, rgba(7, 16, 19, 0.08) 46%, rgba(7, 16, 19, 0.2) 100%);
+    linear-gradient(90deg, rgba(6, 12, 14, 0.96) 0%, rgba(6, 12, 14, 0.86) 42%, rgba(6, 12, 14, 0.34) 100%),
+    linear-gradient(0deg, rgba(7, 16, 19, 0.88) 0%, rgba(7, 16, 19, 0.18) 48%, rgba(7, 16, 19, 0.3) 100%);
 }
 
 .hero::after {
@@ -917,6 +937,15 @@ textarea {
     padding: 122px 0 44px;
   }
 
+  .hero-media {
+    top: 104px;
+    right: 20px;
+    width: min(720px, calc(100% - 40px));
+    height: 430px;
+    background-size: cover;
+    opacity: 0.42;
+  }
+
   .hero-content {
     width: min(720px, calc(100% - 40px));
     margin: 0 auto;
@@ -986,8 +1015,20 @@ textarea {
   }
 
   .lang-toggle {
-    width: 64px;
+    min-width: 94px;
     height: 40px;
+    padding: 3px;
+  }
+
+  .lang-toggle-icon {
+    width: 18px;
+    height: 18px;
+    margin: 0 2px 0 3px;
+  }
+
+  .lang-option {
+    width: 26px;
+    height: 32px;
   }
 
   .hero {
@@ -996,7 +1037,13 @@ textarea {
   }
 
   .hero-media {
+    top: 92px;
+    right: 14px;
+    width: calc(100% - 28px);
+    height: 310px;
     background-position: 62% center;
+    border-radius: 12px;
+    opacity: 0.28;
   }
 
   .hero-overlay {
