@@ -371,16 +371,70 @@
               <span data-i18n="form.email">Email</span>
               <input name="email" type="email" autocomplete="email" required />
             </label>
-            <label>
-              <span data-i18n="form.topic">Topic</span>
-              <select name="topic" required>
-                <option value="" data-i18n="form.option.placeholder">Select one</option>
-                <option value="Product demo" data-i18n="form.option.demo">Product demo</option>
-                <option value="Partnership" data-i18n="form.option.partnership">Partnership</option>
-                <option value="Investor briefing" data-i18n="form.option.investor">Investor briefing</option>
-                <option value="Website content" data-i18n="form.option.website">Website content</option>
-              </select>
-            </label>
+            <div class="form-field custom-select-field" data-custom-select>
+              <span class="field-label" id="topic-label" data-i18n="form.topic">Topic</span>
+              <input name="topic" type="hidden" data-custom-select-input />
+              <button
+                class="custom-select-trigger"
+                type="button"
+                aria-labelledby="topic-label topic-selected-value"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+                data-custom-select-trigger
+              >
+                <span id="topic-selected-value" data-custom-select-value data-i18n="form.option.placeholder">Select one</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </button>
+              <div class="custom-select-menu" role="listbox" aria-labelledby="topic-label" data-custom-select-menu>
+                <button
+                  class="custom-select-option"
+                  type="button"
+                  role="option"
+                  aria-selected="false"
+                  data-custom-select-option
+                  data-value="Product demo"
+                  data-i18n="form.option.demo"
+                >
+                  Product demo
+                </button>
+                <button
+                  class="custom-select-option"
+                  type="button"
+                  role="option"
+                  aria-selected="false"
+                  data-custom-select-option
+                  data-value="Partnership"
+                  data-i18n="form.option.partnership"
+                >
+                  Partnership
+                </button>
+                <button
+                  class="custom-select-option"
+                  type="button"
+                  role="option"
+                  aria-selected="false"
+                  data-custom-select-option
+                  data-value="Investor briefing"
+                  data-i18n="form.option.investor"
+                >
+                  Investor briefing
+                </button>
+                <button
+                  class="custom-select-option"
+                  type="button"
+                  role="option"
+                  aria-selected="false"
+                  data-custom-select-option
+                  data-value="Website content"
+                  data-i18n="form.option.website"
+                >
+                  Website content
+                </button>
+              </div>
+              <p class="field-error" data-custom-select-error data-i18n="form.topicRequired" hidden>Please choose a topic.</p>
+            </div>
             <label>
               <span data-i18n="form.message">Message</span>
               <textarea

@@ -808,7 +808,8 @@ textarea {
   border-radius: var(--radius);
 }
 
-.contact-form label {
+.contact-form label,
+.form-field {
   display: grid;
   gap: 8px;
   color: rgba(255, 255, 255, 0.76);
@@ -817,7 +818,6 @@ textarea {
 }
 
 .contact-form input,
-.contact-form select,
 .contact-form textarea {
   width: 100%;
   min-height: 46px;
@@ -837,14 +837,124 @@ textarea {
 }
 
 .contact-form input:focus,
-.contact-form select:focus,
 .contact-form textarea:focus {
   border-color: var(--teal);
   box-shadow: 0 0 0 3px rgba(15, 183, 168, 0.18);
 }
 
-.contact-form option {
-  color: var(--ink);
+.field-label {
+  display: block;
+}
+
+.custom-select-field {
+  position: relative;
+}
+
+.custom-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 13px;
+  color: #ffffff;
+  text-align: left;
+  background: linear-gradient(135deg, rgba(4, 10, 12, 0.92), rgba(10, 26, 29, 0.88));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius);
+  outline: none;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.custom-select-trigger:hover,
+.custom-select-field.is-open .custom-select-trigger,
+.custom-select-trigger:focus-visible {
+  background: linear-gradient(135deg, rgba(7, 18, 20, 0.98), rgba(12, 39, 40, 0.94));
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(15, 183, 168, 0.16);
+}
+
+.custom-select-field.has-error .custom-select-trigger {
+  border-color: rgba(255, 104, 77, 0.74);
+  box-shadow: 0 0 0 3px rgba(255, 104, 77, 0.16);
+}
+
+.custom-select-trigger svg {
+  flex: 0 0 auto;
+  width: 19px;
+  height: 19px;
+  color: #c8fff4;
+  transition: transform 160ms ease;
+}
+
+.custom-select-trigger path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.custom-select-field.is-open .custom-select-trigger svg {
+  transform: rotate(180deg);
+}
+
+.custom-select-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  left: 0;
+  z-index: 10;
+  display: grid;
+  gap: 4px;
+  padding: 6px;
+  background: rgba(5, 13, 15, 0.98);
+  border: 1px solid rgba(200, 255, 244, 0.2);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 52px rgba(0, 0, 0, 0.36);
+  transform: translateY(-4px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease;
+}
+
+.custom-select-field.is-open .custom-select-menu {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.custom-select-option {
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 11px;
+  color: rgba(255, 255, 255, 0.82);
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.custom-select-option:hover,
+.custom-select-option:focus-visible,
+.custom-select-option[aria-selected="true"] {
+  color: #061110;
+  background: linear-gradient(135deg, #9dff58, #1ce0cf);
+  outline: none;
+}
+
+.field-error {
+  margin: 0;
+  color: #ffb7aa;
+  font-size: 0.82rem;
 }
 
 .form-status {

@@ -82,6 +82,7 @@ const pageCopy = {
     "form.option.partnership": "合作討論",
     "form.option.investor": "投資人簡報",
     "form.option.website": "官網文案調整",
+    "form.topicRequired": "請選擇想討論的方向。",
     "form.message": "補充說明",
     "form.message.placeholder": "例如：想看完整 observer workflow，或需要英文版官網。",
     "form.submit": "建立聯絡郵件",
@@ -169,6 +170,7 @@ const pageCopy = {
     "form.option.partnership": "Partnership",
     "form.option.investor": "Investor briefing",
     "form.option.website": "Website copy",
+    "form.topicRequired": "Please choose a topic.",
     "form.message": "Message",
     "form.message.placeholder": "For example: I want to see the full observer workflow or need an English version.",
     "form.submit": "Create Email",
@@ -276,6 +278,8 @@ function applyTranslations(locale) {
     node.setAttribute("placeholder", t(node.dataset.i18nPlaceholder));
   });
 
+  syncCustomSelectLabels();
+
   if (langToggle) {
     langToggle.setAttribute("aria-label", t("lang.toggle"));
     langToggle.setAttribute("aria-pressed", String(locale === "en"));
@@ -381,6 +385,146 @@ if ("IntersectionObserver" in window && sections.length > 0) {
   sections.forEach((section) => sectionObserver.observe(section));
 }
 
+const customSelects = [...document.querySelectorAll("[data-custom-select]")];
+
+function customSelectParts(field) {
+  return {
+    trigger: field.querySelector("[data-custom-select-trigger]"),
+    input: field.querySelector("[data-custom-select-input]"),
+    value: field.querySelector("[data-custom-select-value]"),
+    options: [...field.querySelectorAll("[data-custom-select-option]")],
+    error: field.querySelector("[data-custom-select-error]"),
+  };
+}
+
+function closeCustomSelects(exceptField = null) {
+  customSelects.forEach((field) => {
+    if (field === exceptField) return;
+    const { trigger } = customSelectParts(field);
+    field.classList.remove("is-open");
+    trigger?.setAttribute("aria-expanded", "false");
+  });
+}
+
+function syncCustomSelectLabels() {
+  customSelects.forEach((field) => {
+    const { input, options, value } = customSelectParts(field);
+    if (!input || !value) return;
+
+    const selectedOption = options.find((option) => option.dataset.value === input.value);
+    value.textContent = selectedOption ? selectedOption.textContent.trim() : t("form.option.placeholder");
+  });
+}
+
+function setCustomSelectValue(field, option) {
+  const { error, input, options, trigger, value } = customSelectParts(field);
+  if (!input || !value) return;
+
+  input.value = option.dataset.value || "";
+  value.textContent = option.textContent.trim();
+  options.forEach((item) => {
+    item.setAttribute("aria-selected", String(item === option));
+  });
+  field.classList.remove("has-error", "is-open");
+  trigger?.setAttribute("aria-expanded", "false");
+  if (error) {
+    error.hidden = true;
+  }
+}
+
+function focusCustomSelectOption(options, currentIndex, direction) {
+  if (options.length === 0) return;
+  const nextIndex = (currentIndex + direction + options.length) % options.length;
+  options[nextIndex].focus();
+}
+
+function validateCustomSelects() {
+  let isValid = true;
+
+  customSelects.forEach((field) => {
+    const { error, input, trigger } = customSelectParts(field);
+    const hasValue = Boolean(input?.value);
+    field.classList.toggle("has-error", !hasValue);
+
+    if (error) {
+      error.hidden = hasValue;
+    }
+
+    if (!hasValue) {
+      isValid = false;
+      trigger?.focus();
+    }
+  });
+
+  return isValid;
+}
+
+customSelects.forEach((field) => {
+  const { input, options, trigger } = customSelectParts(field);
+  if (!trigger || !input) return;
+
+  trigger.addEventListener("click", () => {
+    const isOpen = field.classList.contains("is-open");
+    closeCustomSelects(field);
+    field.classList.toggle("is-open", !isOpen);
+    trigger.setAttribute("aria-expanded", String(!isOpen));
+  });
+
+  trigger.addEventListener("keydown", (event) => {
+    if (!["ArrowDown", "Enter", " "].includes(event.key)) return;
+    event.preventDefault();
+    closeCustomSelects(field);
+    field.classList.add("is-open");
+    trigger.setAttribute("aria-expanded", "true");
+
+    const selectedIndex = Math.max(
+      0,
+      options.findIndex((option) => option.dataset.value === input.value),
+    );
+    options[selectedIndex]?.focus();
+  });
+
+  options.forEach((option, index) => {
+    option.addEventListener("click", () => {
+      setCustomSelectValue(field, option);
+      trigger.focus();
+    });
+
+    option.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        field.classList.remove("is-open");
+        trigger.setAttribute("aria-expanded", "false");
+        trigger.focus();
+      }
+
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        focusCustomSelectOption(options, index, 1);
+      }
+
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        focusCustomSelectOption(options, index, -1);
+      }
+
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        setCustomSelectValue(field, option);
+        trigger.focus();
+      }
+    });
+  });
+});
+
+document.addEventListener("pointerdown", (event) => {
+  const target = event.target;
+  if (!(target instanceof Node)) return;
+  const openField = customSelects.find((field) => field.classList.contains("is-open"));
+  if (!openField || openField.contains(target)) return;
+  closeCustomSelects();
+});
+
 const contactForm = document.querySelector("[data-contact-form]");
 const formStatus = document.querySelector("[data-form-status]");
 
@@ -388,6 +532,7 @@ if (contactForm) {
   contactForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    if (!validateCustomSelects()) return;
     if (!contactForm.reportValidity()) return;
 
     const formData = new FormData(contactForm);
