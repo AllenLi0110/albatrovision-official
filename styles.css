@@ -17,6 +17,7 @@
   --shadow: 0 22px 70px rgba(16, 19, 22, 0.18);
   --radius: 8px;
   --container: 1180px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -125,6 +126,10 @@ textarea {
   margin-left: 2px;
 }
 
+.brand:hover .brand-mark span {
+  animation: mark-current 760ms var(--ease-out);
+}
+
 .main-nav {
   display: flex;
   align-items: center;
@@ -133,6 +138,7 @@ textarea {
 }
 
 .main-nav a {
+  position: relative;
   padding: 10px 14px;
   border-radius: var(--radius);
   color: rgba(249, 255, 253, 0.78);
@@ -147,6 +153,25 @@ textarea {
 .main-nav a.is-active {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.12);
+}
+
+.main-nav a::after {
+  position: absolute;
+  right: 14px;
+  bottom: 7px;
+  left: 14px;
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg, var(--lime), var(--teal));
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms var(--ease-out);
+}
+
+.main-nav a:hover::after,
+.main-nav a.is-active::after {
+  transform: scaleX(1);
 }
 
 .header-actions {
@@ -186,6 +211,8 @@ textarea {
 }
 
 .header-cta {
+  position: relative;
+  overflow: hidden;
   padding: 11px 16px;
   color: #061110;
   background: #ffffff;
@@ -200,6 +227,22 @@ textarea {
 .header-cta:hover {
   background: #c8fff4;
   transform: translateY(-1px);
+}
+
+.header-cta::after,
+.button-primary::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.34) 46%, transparent 54%);
+  transform: translateX(-140%);
+  transition: transform 620ms var(--ease-out);
+  pointer-events: none;
+}
+
+.header-cta:hover::after,
+.button-primary:hover::after {
+  transform: translateX(140%);
 }
 
 .icon-button {
@@ -246,6 +289,23 @@ textarea {
   isolation: isolate;
 }
 
+.hero::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background-image: repeating-linear-gradient(
+    -8deg,
+    transparent 0 46px,
+    rgba(200, 255, 244, 0.045) 47px 48px,
+    transparent 49px 92px
+  );
+  background-size: 160% 160%;
+  opacity: 0.72;
+  pointer-events: none;
+  animation: current-drift 24s linear infinite;
+}
+
 .hero-media {
   position: absolute;
   top: 126px;
@@ -261,6 +321,18 @@ textarea {
   border-radius: 18px;
   box-shadow: 0 34px 90px rgba(0, 0, 0, 0.42);
   opacity: 0.68;
+  overflow: hidden;
+  animation: vessel-float 11s ease-in-out infinite;
+}
+
+.hero-media::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(115deg, transparent 0%, rgba(200, 255, 244, 0.14) 48%, transparent 58%);
+  transform: translateX(-130%);
+  animation: deck-sweep 9s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .hero-overlay {
@@ -274,13 +346,14 @@ textarea {
 
 .hero::after {
   position: absolute;
-  right: -15%;
-  bottom: -20%;
+  right: 0;
+  bottom: 0;
+  left: 36%;
   z-index: -1;
-  width: 58%;
-  height: 44%;
+  height: 36%;
   content: "";
-  background: radial-gradient(circle, rgba(15, 183, 168, 0.3), rgba(15, 183, 168, 0) 65%);
+  background: linear-gradient(90deg, rgba(15, 183, 168, 0), rgba(15, 183, 168, 0.22), rgba(143, 214, 62, 0.08));
+  filter: blur(22px);
 }
 
 .hero-content {
@@ -326,6 +399,8 @@ textarea {
 }
 
 .button {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -374,6 +449,14 @@ textarea {
 .hero-stats div {
   padding-left: 16px;
   border-left: 3px solid var(--teal);
+  transition:
+    border-color 180ms ease,
+    transform 180ms var(--ease-out);
+}
+
+.hero-stats div:hover {
+  border-color: var(--lime);
+  transform: translateY(-2px);
 }
 
 .hero-stats dt {
@@ -420,6 +503,16 @@ textarea {
   font-size: 0.86rem;
   font-weight: 850;
   white-space: nowrap;
+  transition:
+    border-color 180ms ease,
+    transform 180ms var(--ease-out),
+    background 180ms ease;
+}
+
+.strip-grid span:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(200, 255, 244, 0.34);
+  transform: translateY(-2px);
 }
 
 .section {
@@ -464,12 +557,44 @@ textarea {
 }
 
 .module-card {
+  position: relative;
   min-height: 290px;
   padding: 24px;
   background: #ffffff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: 0 16px 44px rgba(30, 47, 48, 0.08);
+  overflow: hidden;
+  transition:
+    border-color 180ms ease,
+    box-shadow 220ms ease,
+    transform 220ms var(--ease-out);
+}
+
+.module-card::after,
+.flow-list li::after,
+.scope-grid article::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(135deg, rgba(15, 183, 168, 0.08), transparent 44%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.module-card:hover,
+.flow-list li:hover,
+.scope-grid article:hover {
+  border-color: rgba(15, 183, 168, 0.34);
+  box-shadow: 0 22px 58px rgba(30, 47, 48, 0.12);
+  transform: translateY(-4px);
+}
+
+.module-card:hover::after,
+.flow-list li:hover::after,
+.scope-grid article:hover::after {
+  opacity: 1;
 }
 
 .module-icon {
@@ -561,6 +686,15 @@ textarea {
   border-radius: var(--radius);
   font-weight: 850;
   cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ease-out);
+}
+
+.tour-tab:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 .tour-tab.active {
@@ -610,6 +744,16 @@ textarea {
   margin: 0;
 }
 
+.tour-media::before {
+  position: absolute;
+  inset: 14px;
+  z-index: -1;
+  content: "";
+  border: 1px solid rgba(200, 255, 244, 0.16);
+  border-radius: var(--radius);
+  transform: translate(12px, 12px);
+}
+
 .tour-media img {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -618,6 +762,14 @@ textarea {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   clip-path: inset(0 round var(--radius));
+  transition:
+    opacity 180ms ease,
+    transform 260ms var(--ease-out);
+}
+
+.tour-media.is-swapping img {
+  opacity: 0.22;
+  transform: translateY(6px);
 }
 
 .tour-media figcaption {
@@ -637,11 +789,17 @@ textarea {
 }
 
 .flow-list li {
+  position: relative;
   min-height: 310px;
   padding: 22px;
   background: #ffffff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  overflow: hidden;
+  transition:
+    border-color 180ms ease,
+    box-shadow 220ms ease,
+    transform 220ms var(--ease-out);
 }
 
 .flow-list span {
@@ -688,11 +846,27 @@ textarea {
 }
 
 .text-link {
+  position: relative;
   display: inline-flex;
   margin-top: 22px;
   color: #9dff58;
   font-weight: 850;
-  border-bottom: 1px solid currentColor;
+}
+
+.text-link::after {
+  position: absolute;
+  right: 0;
+  bottom: -3px;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: currentColor;
+  transform-origin: left;
+  transition: transform 180ms var(--ease-out);
+}
+
+.text-link:hover::after {
+  transform: scaleX(0.72);
 }
 
 .video-frame {
@@ -704,11 +878,27 @@ textarea {
   overflow: hidden;
 }
 
+.video-frame::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05), transparent 24%),
+    repeating-linear-gradient(0deg, rgba(200, 255, 244, 0.06) 0 1px, transparent 1px 34px);
+  opacity: 0.42;
+  pointer-events: none;
+}
+
 .video-frame img,
 .video-frame video {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  transition: transform 360ms var(--ease-out);
+}
+
+.video-frame:hover img {
+  transform: scale(1.015);
 }
 
 .section-scope {
@@ -722,11 +912,17 @@ textarea {
 }
 
 .scope-grid article {
+  position: relative;
   min-height: 360px;
   padding: 24px;
   background: #ffffff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  overflow: hidden;
+  transition:
+    border-color 180ms ease,
+    box-shadow 220ms ease,
+    transform 220ms var(--ease-out);
 }
 
 .scope-grid h3 {
@@ -797,6 +993,16 @@ textarea {
   border-radius: var(--radius);
   font-size: 0.86rem;
   font-weight: 850;
+  transition:
+    border-color 180ms ease,
+    transform 180ms var(--ease-out),
+    background 180ms ease;
+}
+
+.contact-points span:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(200, 255, 244, 0.34);
+  transform: translateY(-2px);
 }
 
 .contact-form {
@@ -806,6 +1012,7 @@ textarea {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
 }
 
 .contact-form label,
@@ -985,6 +1192,64 @@ textarea {
 .footer-grid a:last-child {
   color: #9dff58;
   font-weight: 850;
+}
+
+.motion-ready .reveal-item {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 620ms var(--ease-out),
+    transform 620ms var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.motion-ready .reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes current-drift {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 220px 120px;
+  }
+}
+
+@keyframes vessel-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes deck-sweep {
+  0%,
+  42% {
+    transform: translateX(-130%);
+  }
+
+  72%,
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+@keyframes mark-current {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  45% {
+    transform: translateX(5px);
+  }
 }
 
 @media (max-width: 980px) {
@@ -1200,11 +1465,21 @@ textarea {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .motion-ready .reveal-item {
+    opacity: 1;
+    transform: none;
   }
 }

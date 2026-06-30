@@ -3,6 +3,7 @@ const navToggle = document.querySelector("[data-nav-toggle]");
 const nav = document.querySelector("[data-nav]");
 const navLinks = [...document.querySelectorAll(".main-nav a")];
 const langToggle = document.querySelector("[data-lang-toggle]");
+const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 const pageCopy = {
   zh: {
@@ -338,12 +339,17 @@ function renderTour(key) {
   if (!item || !localizedItem || !tourTitle || !tourBody || !tourImage || !tourCaption || !tourMetrics) return;
 
   activeTourKey = key;
+  const tourMedia = tourImage.closest(".tour-media");
 
   tourTabs.forEach((tab) => {
     const isActive = tab.dataset.tourTab === key;
     tab.classList.toggle("active", isActive);
     tab.setAttribute("aria-selected", String(isActive));
   });
+
+  if (!reduceMotionQuery.matches) {
+    tourMedia?.classList.add("is-swapping");
+  }
 
   tourTitle.textContent = localizedItem.title;
   tourBody.textContent = localizedItem.body;
@@ -357,6 +363,12 @@ function renderTour(key) {
       return li;
     }),
   );
+
+  if (!reduceMotionQuery.matches) {
+    window.setTimeout(() => {
+      tourMedia?.classList.remove("is-swapping");
+    }, 160);
+  }
 }
 
 tourTabs.forEach((tab) => {
@@ -383,6 +395,50 @@ if ("IntersectionObserver" in window && sections.length > 0) {
   );
 
   sections.forEach((section) => sectionObserver.observe(section));
+}
+
+const revealItems = [
+  ...document.querySelectorAll(
+    [
+      ".solution-strip .strip-grid > *",
+      ".section-heading",
+      ".module-card",
+      ".tour-copy",
+      ".tour-media",
+      ".flow-list li",
+      ".demo-copy",
+      ".video-frame",
+      ".scope-grid article",
+      ".contact-layout > div",
+      ".contact-form",
+    ].join(", "),
+  ),
+];
+
+if (!reduceMotionQuery.matches && revealItems.length > 0) {
+  document.documentElement.classList.add("motion-ready");
+
+  revealItems.forEach((item, index) => {
+    item.classList.add("reveal-item");
+    item.style.setProperty("--reveal-delay", `${(index % 4) * 70}ms`);
+  });
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
+    );
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+  } else {
+    revealItems.forEach((item) => item.classList.add("is-visible"));
+  }
 }
 
 const customSelects = [...document.querySelectorAll("[data-custom-select]")];
