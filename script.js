@@ -71,19 +71,19 @@ const pageCopy = {
     "workflow.four.copy": "報表工作區對齊 PM 電子觀察員欄位，讓目前可用資料和缺漏值都清楚呈現。",
     "story.capture.kicker": "01 / 擷取",
     "story.capture.title": "證據從船舶邊緣端開始",
-    "story.capture.copy": "錄影、縮圖與 AI 事件 metadata 會先被整理，才進入人工判讀時間線。",
+    "story.capture.copy": "船端錄影、縮圖與 AI 事件 metadata 會在進件時先被整理，才進入人工判讀時間線。",
     "story.align.kicker": "02 / 對齊",
-    "story.align.title": "作業脈絡加入同一個時間",
-    "story.align.copy": "GPS、鏡頭軌道、gateway 狀態與作業脈絡，都圍繞同一段來源影片秒數。",
+    "story.align.title": "所有脈絡對齊來源影片時間",
+    "story.align.copy": "GPS、鏡頭軌道、gateway 狀態與 AI 事件，都圍繞同一段來源影片秒數。",
     "story.decide.kicker": "03 / 判定",
-    "story.decide.title": "人工判斷被明確保留",
-    "story.decide.copy": "機器事件維持證據層；觀察員標記成為正式判讀層。",
-    "story.visual.capture.title": "船隊儀表板",
-    "story.visual.capture.caption": "人工判讀前，船況與 edge 狀態先被收斂。",
+    "story.decide.title": "人工判斷成為正式判讀層",
+    "story.decide.copy": "觀察員標記會明確留在機器證據旁邊，並延伸成 report candidates。",
+    "story.visual.capture.title": "船端影像入口",
+    "story.visual.capture.caption": "原始船上影像是第一個證據物件。",
     "story.visual.align.title": "來源時間線",
-    "story.visual.align.caption": "鏡頭與事件都對齊到同一段來源影片。",
-    "story.visual.decide.title": "人工分析",
-    "story.visual.decide.caption": "觀察員標記與 AI 事件並排保留。",
+    "story.visual.align.caption": "鏡頭、事件與船舶脈絡共用同一個時間。",
+    "story.visual.decide.title": "報告工作區",
+    "story.visual.decide.caption": "人工判讀變成結構化 observer output。",
     "command.title": "為海洋證據打造的精簡指揮中心",
     "command.copy":
       "更完整的 command-center 視覺能傳達 AlbatroVision 不是概念頁，而是一個能承接船隻狀態、鏡頭軌道、證據進件與判讀準備的作業層。",
@@ -211,19 +211,19 @@ const pageCopy = {
       "The reports workspace aligns available timeline data with electronic observer fields while making missing values visible.",
     "story.capture.kicker": "01 / Capture",
     "story.capture.title": "Evidence starts at the vessel edge",
-    "story.capture.copy": "Recordings, thumbnails and AI event metadata are bundled before the reviewer ever opens the timeline.",
+    "story.capture.copy": "Camera recordings, thumbnails and AI event metadata are bundled at ingest before the reviewer ever opens the timeline.",
     "story.align.kicker": "02 / Align",
-    "story.align.title": "Context joins the same clock",
-    "story.align.copy": "GPS, camera lane, gateway state and operations context line up around the same source-video seconds.",
+    "story.align.title": "Everything aligns to source-video time",
+    "story.align.copy": "GPS, camera lanes, gateway state and AI events line up around the same source-video seconds.",
     "story.decide.kicker": "03 / Decide",
-    "story.decide.title": "Human judgement remains explicit",
-    "story.decide.copy": "Machine events stay visible as evidence while observer marks become the official review layer.",
-    "story.visual.capture.title": "Fleet Dashboard",
-    "story.visual.capture.caption": "Live vessel context before human review.",
+    "story.decide.title": "Human judgement becomes the review layer",
+    "story.decide.copy": "Observer marks stay explicit beside machine evidence, then carry forward into report candidates.",
+    "story.visual.capture.title": "Edge Camera Feed",
+    "story.visual.capture.caption": "Raw vessel video is the first evidence object.",
     "story.visual.align.title": "Source Timeline",
-    "story.visual.align.caption": "Camera lanes and events align to one source recording.",
-    "story.visual.decide.title": "Human Analysis",
-    "story.visual.decide.caption": "Observer marks sit beside raw AI evidence.",
+    "story.visual.align.caption": "Camera lanes, events and vessel context share one clock.",
+    "story.visual.decide.title": "Report Workspace",
+    "story.visual.decide.caption": "Human review becomes structured observer output.",
     "command.title": "A compact operations surface for ocean evidence",
     "command.copy":
       "A richer command-center view can communicate that AlbatroVision is not a brochure concept. It behaves like a real operating layer for vessel state, camera lanes, evidence intake and review readiness.",
@@ -337,20 +337,20 @@ const tourItems = {
 
 const storyItems = {
   capture: {
-    image: "assets/dashboard-hero.png",
-    alt: "AlbatroVision dashboard with vessel state and edge evidence context",
+    image: "assets/synthetic-camera-feed.png",
+    alt: "AlbatroVision vessel camera feed used as edge evidence intake",
     titleKey: "story.visual.capture.title",
     captionKey: "story.visual.capture.caption",
   },
   align: {
-    image: "assets/demo-preview.png",
-    alt: "AlbatroVision synchronized video evidence preview",
+    image: "assets/manual-review.png",
+    alt: "AlbatroVision human analysis workspace showing synchronized source-video timeline",
     titleKey: "story.visual.align.title",
     captionKey: "story.visual.align.caption",
   },
   decide: {
-    image: "assets/manual-review.png",
-    alt: "AlbatroVision human analysis workspace for observer review",
+    image: "assets/reports-workspace.png",
+    alt: "AlbatroVision report workspace showing observer report candidate preparation",
     titleKey: "story.visual.decide.title",
     captionKey: "story.visual.decide.caption",
   },
@@ -381,6 +381,7 @@ let currentLocale = getStoredLocale();
 let activeTourKey = "dashboard";
 let activeStoryKey = "capture";
 let activeDemoStepKey = "dashboard";
+let storyObserverLockedUntil = 0;
 
 function getStoredLocale() {
   try {
@@ -440,6 +441,7 @@ function applyTranslations(locale) {
   }
 
   syncNavLabel();
+  storyObserverLockedUntil = Date.now() + 450;
   renderTour(activeTourKey);
   renderStory(activeStoryKey);
   renderDemoStep(activeDemoStepKey);
@@ -769,7 +771,7 @@ if ("IntersectionObserver" in window && storyCards.length > 0) {
       const visibleEntry = entries
         .filter((entry) => entry.isIntersecting)
         .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visibleEntry) {
+      if (visibleEntry && Date.now() >= storyObserverLockedUntil) {
         renderStory(visibleEntry.target.dataset.storyCard);
       }
     },
