@@ -396,11 +396,11 @@ textarea {
 .hero-status-stack {
   position: absolute;
   top: 138px;
-  right: max(10px, calc((100vw - var(--container)) / 2 - 96px));
+  right: clamp(12px, calc((100vw - var(--container)) / 2 - 220px), 34px);
   z-index: 2;
   display: grid;
   gap: 10px;
-  width: min(216px, 17vw);
+  width: min(210px, 16vw);
   pointer-events: auto;
 }
 
